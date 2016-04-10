@@ -13,9 +13,6 @@ namespace BT{
 		{
 			this.action = action;
 		}
-
-
-
 		protected override Result Excute ()
 		{
 

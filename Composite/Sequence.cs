@@ -5,6 +5,15 @@ namespace BT
 	public class Sequence : Composite
 	{
 
+		public Sequence()
+		{}
+
+
+		public Sequence(BTNode child):base()
+		{
+			base.AddChild(child);
+		}
+
 		protected override Result Excute()
 		{
 			if (runningIndex >= children.Count)
@@ -26,7 +35,7 @@ namespace BT
 				//Debug.Log (runningIndex);
 			}
 
-			return result;
+			return Result.Running;
 
 		}
 	}
