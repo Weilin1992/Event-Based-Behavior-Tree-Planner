@@ -24,7 +24,7 @@ public class SequenceParallelTest : MonoBehaviour {
 		LoopNTimes l1 = new LoopNTimes (new Action (() => test1_increment ()), 20);
 		LoopNTimes l2 = new LoopNTimes (new Action (() => test2_increment ()), 20);
 
-		root = new LoopNTimes (new SequenceParallel (l1, l2), 1);
+		root = new Sequence (new SequenceParallel (l1, l2));
 
 	}
 	
@@ -60,7 +60,8 @@ public class SequenceParallelTest : MonoBehaviour {
 		Debug.Log ("test increment");
 		test2++; 
 		Debug.Log (test2);
-		if (test2 > 10) {Debug.Log (Result.Success);
+		if (test2 > 10) {
+			Debug.Log (Result.Success);
 			return Result.Success;
 
 		} else 
