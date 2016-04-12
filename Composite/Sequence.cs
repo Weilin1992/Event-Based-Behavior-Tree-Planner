@@ -4,14 +4,9 @@ namespace BT
 {
 	public class Sequence : Composite
 	{
-
-		public Sequence()
-		{}
-
-
-		public Sequence(BTNode child):base()
+		public Sequence(params BTNode[] children):base(children)
 		{
-			base.AddChild(child);
+			
 		}
 
 		protected override Result Excute()
@@ -20,7 +15,6 @@ namespace BT
 				return Result.Success;
 
 			Result result = children [runningIndex].Tick ();
-
 
 			if (result == Result.Failed) 
 			{
@@ -39,6 +33,4 @@ namespace BT
 
 		}
 	}
-
-
 }

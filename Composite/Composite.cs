@@ -9,10 +9,10 @@ namespace BT
 		protected int runningIndex;
 		protected List<BTNode> children;
 
-		protected Composite()
+		protected Composite(params BTNode[] children)
 		{
 			runningIndex = 0;
-			children = new List<BTNode>();
+			this.children = new List<BTNode>(children);
 		}
 
 		protected override void Enter()
