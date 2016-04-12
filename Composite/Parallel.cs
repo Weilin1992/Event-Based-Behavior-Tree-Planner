@@ -1,6 +1,8 @@
 ﻿namespace BT
 {
 
+	//parallel excute child
+
 	public abstract class Parallel:Composite
 	{
 
