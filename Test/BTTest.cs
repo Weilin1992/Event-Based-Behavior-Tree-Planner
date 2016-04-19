@@ -15,9 +15,6 @@ public class BTTest : MonoBehaviour {
 	Result result = Result.Running;
 
 	void Start () {
-
-
-
 		root = new Sequence ();	
 		action = ()=>test_increment();
 		root.AddChild (new Action (action));

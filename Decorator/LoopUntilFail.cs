@@ -22,7 +22,6 @@
 				if(result == Result.Failed)
 					return Result.Failed;
 				return Result.Running;
-
 			}
 			else
 			{
@@ -30,7 +29,6 @@
 				{
 					return Result.Failed;
 				}
-
 				currentTimes++;
 				Result result = child.Tick();
 				if(result == Result.Failed)
