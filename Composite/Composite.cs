@@ -97,8 +97,10 @@ namespace BT
 			{
 				children.RemoveAt (index);
 			}
-
 		}
+
+
+
 		public void ClearChildren()
 		{
 			for (int i = 0; i < children.Count; i++) {
