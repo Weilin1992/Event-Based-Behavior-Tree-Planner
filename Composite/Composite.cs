@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 
+
+
 namespace BT
 {
 	public abstract class Composite : BTNode
@@ -24,8 +26,6 @@ namespace BT
 		{
 			ClearChildren ();
 		}
-
-
 		public BTNode FindChild(string name)
 		{
 			int index;

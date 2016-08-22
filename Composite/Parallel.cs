@@ -1,4 +1,4 @@
-﻿namespace BT
+namespace BT
 {
 
 	//parallel excute child
@@ -21,8 +21,10 @@
 			for (int i = 0; i < this.runstatus.Length; i++) 
 			{
 				this.runstatus [i] = Result.Running;
+			
 			}
 			base.Enter ();
+
 		}
 
 	}

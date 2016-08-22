@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 using BT;
 public class LeafwaitTest : MonoBehaviour {
 
@@ -33,7 +33,6 @@ public class LeafwaitTest : MonoBehaviour {
 		tickTimes++;
 
 	}
-
 
 
 	Result test_increment()

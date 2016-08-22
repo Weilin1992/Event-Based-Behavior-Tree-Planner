@@ -1,6 +1,4 @@
-﻿using System;
-
-
+﻿
 namespace BT{
 	public delegate Result ActionDelegate();
 
@@ -15,7 +13,6 @@ namespace BT{
 		}
 		protected override Result Excute ()
 		{
-
 			return action ();
 		}
 	}

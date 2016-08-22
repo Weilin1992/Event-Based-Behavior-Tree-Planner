@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
 using System.Diagnostics;
-using System;
-using UnityEngine;
-
 
 namespace BT
 {
@@ -14,12 +11,9 @@ namespace BT
 			this.waitTime = waitTime;
 			this.stopwatch = new Stopwatch();
 		}
-
-
 		protected long waitTime;
 
 		protected Stopwatch stopwatch;
-
 
 		protected override void Enter ()
 		{
@@ -36,20 +30,10 @@ namespace BT
 
 		protected override Result Excute()
 		{
-
 			if(this.stopwatch.ElapsedMilliseconds > this.waitTime)
 				return Result.Success;
 			else
 				return Result.Running;
-
-
 		}
-
-
-
-
-
 	}
-
-
 }

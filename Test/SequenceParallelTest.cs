@@ -1,18 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
 using BT;
 
 public class SequenceParallelTest : MonoBehaviour {
-
-
 	ActionDelegate action;
-
 	BTNode root;
-
 	int test1 = 0;
-
 	int test2 = 0;
-
 	int tickTImes = 0;
 
 	Result result = Result.Running;
@@ -20,12 +13,9 @@ public class SequenceParallelTest : MonoBehaviour {
 	// Use this for initialization
 
 	void Start () {
-
 		LoopNTimes l1 = new LoopNTimes (new Action (() => test1_increment ()), 20);
 		LoopNTimes l2 = new LoopNTimes (new Action (() => test2_increment ()), 20);
-
 		root = new Sequence (new SequenceParallel (l1, l2));
-
 	}
 	
 	// Update is called once per frame
@@ -36,7 +26,6 @@ public class SequenceParallelTest : MonoBehaviour {
 		tickTImes++;
 	}
 
-
 	Result test1_increment()
 	{
 		Debug.Log ("test increment");
@@ -44,16 +33,11 @@ public class SequenceParallelTest : MonoBehaviour {
 		Debug.Log (test1);
 		if (test1 > 10) {Debug.Log (Result.Success);
 			return Result.Success;
-
 		} else 
 		{
-			//Debug.Log ("Running");
 			return Result.Running;
-
 		}
 	}
-
-
 
 	Result test2_increment()
 	{
@@ -66,9 +50,7 @@ public class SequenceParallelTest : MonoBehaviour {
 
 		} else 
 		{
-			//Debug.Log ("Running");
 			return Result.Running;
-
 		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿
-using UnityEngine;
+
 namespace BT
 {
 	public class Sequence : Composite
@@ -24,7 +24,7 @@ namespace BT
 			if (result == Result.Success) 
 			{
 				runningIndex++;
-				Debug.Log (children.Count);
+				//Debug.Log (children.Count);
 				return Result.Running;
 				//Debug.Log (runningIndex);
 			}

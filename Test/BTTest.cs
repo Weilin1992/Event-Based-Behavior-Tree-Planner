@@ -1,22 +1,30 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 using BT;
 
 public class BTTest : MonoBehaviour {
-
-	// Use this for initialization
-
+	
 	ActionDelegate  action;
-
 	Sequence root;
 	int test = 0;
 	int i = 0;
 
+	public Transform P;
+	
 	Result result = Result.Running;
-
+	
 	void Start () {
 		root = new Sequence ();	
-		action = ()=>test_increment();
+		action = ()=> {
+		Debug.Log("Test closure");
+
+		if(P.position.x > 10){
+			return Result.Success;
+		}
+		else{
+			return Result.Running;
+			}
+		};
 		root.AddChild (new Action (action));
 	}
 	
@@ -37,14 +45,27 @@ public class BTTest : MonoBehaviour {
 		test++; 
 		if (test > 10) {Debug.Log (Result.Success);
 			return Result.Success;
-
-		} else 
-		{Debug.Log ("Running");
+		} 
+		else {
+			Debug.Log ("Running");
 			return Result.Running;
 
 		}
-		
 	}
+
+	Result test_closure()
+	{
+		Debug.Log("Test closure");
+
+		if(P.position.x > 10){
+			return Result.Success;
+		}
+		else{
+			return Result.Running;
+		}
+
+	}
+
 
 
 }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+
 using BT;
 public class LoopNtimesTest : MonoBehaviour {
 
