@@ -44,9 +44,7 @@ public class LeafwaitTest : MonoBehaviour {
 
 		} else 
 		{
-			//Debug.Log ("Running");
 			return Result.Running;
-
 		}
 
 	}
