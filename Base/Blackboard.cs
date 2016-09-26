@@ -1,6 +1,6 @@
 ﻿
 using System.Collections.Generic;
-
+namespace BT{
 public class Blackboard {
 	private List<object> data = new List<object>();
 	private List<string> name = new List<string>();
@@ -43,4 +43,5 @@ public class Blackboard {
 	} 
 
 
+}
 }
