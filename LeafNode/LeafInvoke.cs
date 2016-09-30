@@ -1,12 +1,12 @@
 ﻿
 namespace BT{
-	public delegate Result LeafAction();
+
 
 	public class LeafInvoke:BTNode{
 
-		private LeafAction action;
+		private ActionDelegate action;
 
-		public LeafInvoke(LeafAction action){
+		public LeafInvoke(ActionDelegate action){
 			this.action = action;
 		}
 		protected override Result Excute(){

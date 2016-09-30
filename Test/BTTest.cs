@@ -37,8 +37,7 @@ public class BTTest : MonoBehaviour {
 		}	
 		i++;
 	}
-
-
+	
 	Result test_increment()
 	{
 		Debug.Log ("test increment");

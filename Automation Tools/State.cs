@@ -1,10 +1,28 @@
-﻿using System.Collections.Generic;
+﻿
 
 namespace BT
 {
 	public class State
 	{
-		Blackboard attribute = new Blackboard();
-		Blackboard relation = new Blackboard();
+		public Blackboard attribute = new Blackboard();
+		public Blackboard relation;
+
+		//register attribute
+		public void register_attr(){
+
+		}
+		//register relation 
+		public void register_relation(){
+
+		}
+
+		
+
+
 	}
+
+
+
+
+
 }

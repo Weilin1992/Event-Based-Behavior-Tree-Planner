@@ -41,7 +41,5 @@ public class Blackboard {
 		}
 		return -1;
 	} 
-
-
 }
 }

@@ -1,12 +1,26 @@
 ﻿using System.Collections.Generic;
-
+using UnityEngine;
 
 namespace BT
 {
-	public class SmartObject
+	public class SmartObject:MonoBehaviour
 	{
-		public List<Affordance> affordance =  new List<Affordance>();
 		State states = new State();
+		public Dictionary<string,Affordance> affordances = new Dictionary<string,Affordance>();
+		public void set_affordance(string s, Affordance f){
+			affordances[s] = f;
+		}
 
+		public void remove_affordance(string s){
+			affordances.Remove(s);
+		}
+
+		public Affordance get_affordance(string s){
+			return affordances[s];
+		}
+
+		public void set_state(){
+		}
 	}
 }
+
