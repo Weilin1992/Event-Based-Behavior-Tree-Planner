@@ -5,8 +5,9 @@ namespace BT
 {
 	public class SmartObject:MonoBehaviour
 	{
-		private  int role_id = 0;
-		private int index = -1;
+		protected WorldManager manager;
+	    protected int role_id = 0;
+		protected int index = -1;
 		// private string name = "";
 		// public string Name{
 		// 	get { return name == "" ? GetType ().Name : name;}
@@ -21,7 +22,7 @@ namespace BT
 		}
 
 		public void init(){
-
+			manager = WorldManager.getInstance();
 		}
 		
 	}

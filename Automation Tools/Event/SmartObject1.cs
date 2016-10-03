@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using BT;
-public class SmartObjecttest : SmartObject {
+public class SmartObject1 : SmartObject {
 
-	
+	public int test1 = 2;
+
+
 	// Use this for initialization
 	void Start () {
+		role_id = 2;
 		init();
 		manager.register_sm(this);
 	}
@@ -14,4 +17,10 @@ public class SmartObjecttest : SmartObject {
 	void Update () {
 	
 	}
+
+	public void test1_inc(int a){
+		test1+= a;
+	}
+
+
 }

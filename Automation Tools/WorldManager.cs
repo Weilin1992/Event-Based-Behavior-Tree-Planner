@@ -6,7 +6,7 @@ namespace BT{
 		private static WorldManager instance;
 		private readonly static int role_num = 10;
 		private List<List<SmartObject>> smobject =  new List<List<SmartObject>>(role_num);
-		private Dictionary<string,Event> all_event = new Dictionary<string,Event>();
+		private Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
 		private Sequence root = new Sequence();
 
 		public static WorldManager getInstance(){
@@ -26,7 +26,7 @@ namespace BT{
 			}
 		}
 
-		public void register_Event(Event e){
+		public void register_Event(BTEvent e){
 			all_event[e.Name] = e;	
 		}
 

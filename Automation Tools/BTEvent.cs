@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace BT{
-	public class Event:BTNode{
+	public class BTEvent:BTNode{
 		private List<int> role_id = new List<int>();
 		private double cost = 0.0;
 		private BTNode root;
@@ -14,6 +14,10 @@ namespace BT{
 				set_postcon();
 			}
 			return result;
+		}
+		
+		public virtual void init_BT(){
+
 		}
 		
 	}
