@@ -9,5 +9,11 @@
 		Success,
 		Failed
 	}
+		public enum EventResult
+	{
+		Running,
+		Success,
+		Failed
+	}
 
 }

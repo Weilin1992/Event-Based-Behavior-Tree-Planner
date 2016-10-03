@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿
 
 namespace BT{
 public class Relationship {
+
+	
 
 	private string relation = "relation_Instance";
 	private static Relationship instance;

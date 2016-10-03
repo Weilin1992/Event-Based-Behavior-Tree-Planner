@@ -1,26 +1,29 @@
-﻿using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 namespace BT
 {
 	public class SmartObject:MonoBehaviour
 	{
-		State states = new State();
-		public Dictionary<string,Affordance> affordances = new Dictionary<string,Affordance>();
-		public void set_affordance(string s, Affordance f){
-			affordances[s] = f;
+		private  int role_id = 0;
+		private int index = -1;
+		// private string name = "";
+		// public string Name{
+		// 	get { return name == "" ? GetType ().Name : name;}
+		// 	set { name = value;}
+		// }
+		public int RoleID{
+			get { return role_id;}
+		}
+		public int Index{
+			get{return index;}
+			set{index = value;}
 		}
 
-		public void remove_affordance(string s){
-			affordances.Remove(s);
-		}
+		public void init(){
 
-		public Affordance get_affordance(string s){
-			return affordances[s];
 		}
-
-		public void set_state(){
-		}
+		
 	}
 }
 
