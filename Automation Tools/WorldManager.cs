@@ -4,10 +4,13 @@ using System.Collections.Generic;
 namespace BT{
 	public class WorldManager  {
 		private static WorldManager instance;
-		private readonly static int role_num = 10;
-		private List<List<SmartObject>> smobject =  new List<List<SmartObject>>(role_num);
+		private readonly static int group_count = 10;
+		private List<Dictionary<int,SmartObject>> smobject =  new List<Dictionary<int,SmartObject>>(group_count);
 		private Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
 		private Sequence root = new Sequence();
+
+		//maybe we have to use prority queue
+		private Queue<BTEvent> eventQueue = new Queue<BTEvent>();
 
 		public static WorldManager getInstance(){
 			if(instance == null){
@@ -17,13 +20,7 @@ namespace BT{
 		}
 
 		public void register_sm(SmartObject so){
-			if(so.Index != -1){
-				smobject[so.RoleID].Add(so);
-				so.Index = smobject[so.RoleID].Count - 1;
-			}
-			else{
-				Debug.Log("Already exist, don't have to reinsert");
-			}
+			smobject[so.GroupID][so.GetInstanceID()] = so;
 		}
 
 		public void register_Event(BTEvent e){
@@ -32,8 +29,17 @@ namespace BT{
 
 		private bool calculate_transition(){
 			bool success = false;
-			
+			//test implement
+
+
+
+			//end
 			return success;
 		}
+
+		public void set_goal(){
+			
+		}
+
 	}
 }
