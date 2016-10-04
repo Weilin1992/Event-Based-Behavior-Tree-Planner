@@ -3,12 +3,14 @@ using System.Collections.Generic;
 
 namespace BT{
 	public class WorldManager  {
+
+		public Blackboard database = new Blackboard();
 		private static WorldManager instance;
 		private readonly static int group_count = 10;
 		private List<Dictionary<int,SmartObject>> smobject =  new List<Dictionary<int,SmartObject>>(group_count);
 		private Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
 		private Sequence root = new Sequence();
-
+		
 		//maybe we have to use prority queue
 		private Queue<BTEvent> eventQueue = new Queue<BTEvent>();
 

@@ -28,6 +28,14 @@ namespace BT
 			manager = WorldManager.getInstance();
 		}
 		
+		protected virtual void register_database(){
+
+		}
+
+		protected virtual void update_database(){
+
+		}
+		
 	}
 }
 
