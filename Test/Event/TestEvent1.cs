@@ -43,8 +43,8 @@ public class TestEvent1 : BTEvent{
 
 
     protected override void init_group_id(){
-        group_id.Add(SmartObject1.GroupID);
-        group_id.Add(SmartObject2.GroupID);
+        group_id.Add(SmartObject1.group_id);
+        group_id.Add(SmartObject2.group_id);
     }
 
     protected override void init_BT(){

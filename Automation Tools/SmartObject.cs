@@ -6,7 +6,7 @@ namespace BT
 	public class SmartObject:MonoBehaviour
 	{
 		protected WorldManager manager;
-	    protected static int group_id;
+	    public static int group_id;
 		protected int gameobject_id = 0;
 		protected int index = -1;
 		
@@ -19,7 +19,7 @@ namespace BT
 			set{instance_id = value;}
 		}
 
-		public static int GroupID{
+		public int GroupID{
 			get { return group_id;}
 		}
 		public int Index{
