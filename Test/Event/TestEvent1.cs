@@ -7,15 +7,31 @@ public class TestEvent1 : BTEvent{
 
     int test_a = 1;
 
+    int participant1_d;
+    int participant2_d;
+    
+
     public override bool check_precon()
     {
-        return participant1.test1 == 2 
-        && participant2.test2 == 3;
+        return manager.database.GetData<int>(participant1.test1_index) == 2 
+        &&  manager.database.GetData<int>(participant2.test2_index) == 3;
     }
 
     public override void set_postcon(){
         participant1.test1 = 0;
         participant2.test2 = 0;
+    }
+
+    public override void set_postcon_database(){
+        participant1_d = manager.database.GetData<int>(participant1.test1_index);
+        participant2_d = manager.database.GetData<int>(participant2.test2_index);
+        manager.database.SetData(participant1.test1_index,0);
+        manager.database.SetData(participant2.test2_index,0);
+    }
+
+    public override void restore_database(){
+        manager.database.SetData(participant1.test1_index,participant1_d);
+        manager.database.SetData(participant2.test2_index,participant2_d);
     }
 
 

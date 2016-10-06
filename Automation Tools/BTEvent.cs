@@ -8,8 +8,13 @@ namespace BT{
 		protected BTNode root;
 		protected WorldManager manager;
 
+
 		public virtual bool check_precon(){return false;}
 		public virtual void set_postcon(){}
+		public virtual void set_postcon_database(){}
+		public virtual void restore_database(){}
+
+
 		protected override Result Excute(){
 			Result result =  root.Tick();
 			if(result == Result.Success){
@@ -18,8 +23,9 @@ namespace BT{
 			return result;
 		}
 		
-		protected virtual void init_BT(){
-		}
+		protected virtual void init_BT(){}
+
+		protected virtual void rebuild_BT(){}
 
 		public  virtual void init(){
 			init_BT();

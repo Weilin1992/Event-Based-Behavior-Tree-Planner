@@ -11,6 +11,9 @@ namespace BT{
 		private Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
 		private Sequence root = new Sequence();
 		
+		public SmartObject1 sm1;
+		public SmartObject2 sm2;
+
 		//maybe we have to use prority queue
 		private Queue<BTEvent> eventQueue = new Queue<BTEvent>();
 
@@ -32,6 +35,11 @@ namespace BT{
 		private bool calculate_transition(){
 			bool success = false;
 			//test implement
+			if(check_goal()){
+				success = true;
+				return success;
+			}
+			
 
 
 
@@ -39,8 +47,10 @@ namespace BT{
 			return success;
 		}
 
-		public void set_goal(){
-			
+		
+
+		public bool check_goal(){
+			return database.GetData<int>(sm1.test1_index) == 0 && database.GetData<int>(sm2.test2_index) ==0;
 		}
 
 	}
