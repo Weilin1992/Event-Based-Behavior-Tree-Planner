@@ -23,7 +23,7 @@ public class TestEvent1 : BTEvent{
     }
 
 
-    public virtual void set_participants(params SmartObject[] parti){
+    public override void  set_participants(params SmartObject[] parti){
          participant1 = (SmartObject1) parti[0];
          participant2 = (SmartObject2) parti[1];
 		}
@@ -42,7 +42,10 @@ public class TestEvent1 : BTEvent{
     }
 
 
-	
+    protected override void init_group_id(){
+        group_id.Add(SmartObject1.GroupID);
+        group_id.Add(SmartObject2.GroupID);
+    }
 
     protected override void init_BT(){
         root = new SequenceParallel(

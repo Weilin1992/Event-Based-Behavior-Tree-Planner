@@ -7,7 +7,6 @@ public class SmartObject2 :  SmartObject{
 	public int test2_index;
 	// Use this for initialization
 	void Start () {
-		group_id = 1;
 		init();
 		manager.register_sm(this);
 	}
@@ -20,12 +19,15 @@ public class SmartObject2 :  SmartObject{
 		test2 += a;
 	}
 	
-	protected void update_database(){
+	protected override void update_database(){
 		manager.database.SetData<int>(test2_index,test2);
 		
 	}
 
-	protected void register_database(){
+	protected override void register_database(){
 		test2_index = manager.database.addData<int>(this.name+gameobject_id.ToString() + "test2",test2);
+	}
+	static SmartObject2(){
+		group_id  = 1;
 	}
 }

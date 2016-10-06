@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BT{
 	public class BTEvent:BTNode{
-		private List<int> role_id = new List<int>();
+		public List<int> group_id = new List<int>();
 		private double cost = 0.0;
 		protected BTNode root;
 		protected WorldManager manager;
@@ -14,10 +14,14 @@ namespace BT{
 
 		public virtual void set_participants(params SmartObject[] parti){
 		}
+		protected virtual void init_group_id(){
+		}
 
 		public virtual void set_postcon_database(){}
 		public virtual void restore_database(){}
-
+		public virtual double calculate_cost(){
+			return cost;
+		}
 
 		protected override Result Excute(){
 			Result result =  root.Tick();
