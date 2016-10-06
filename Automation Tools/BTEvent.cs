@@ -10,6 +10,9 @@ namespace BT{
 
 		public virtual bool check_precon(){return false;}
 		public virtual void set_postcon(){}
+		public virtual void set_participants(params SmartObject[] parti){
+		}
+
 		protected override Result Excute(){
 			Result result =  root.Tick();
 			if(result == Result.Success){

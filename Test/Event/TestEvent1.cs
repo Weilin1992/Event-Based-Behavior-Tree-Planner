@@ -18,16 +18,16 @@ public class TestEvent1 : BTEvent{
         participant2.test2 = 0;
     }
 
-
-	
+    public virtual void set_participants(params SmartObject[] parti){
+         participant1 = (SmartObject1) parti[0];
+         participant2 = (SmartObject2) parti[1];
+		}
+ 
     protected override void init_BT(){
         root = new SequenceParallel(
             new LeafInvoke(test_increment)
         );
     }
-
-
-
 
     Result test_increment(){
 
