@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+
 namespace BT{
 	public class WorldManager  {
 
@@ -9,7 +10,9 @@ namespace BT{
 		private const int group_count = 10;
 		
 		private List<Dictionary<int,SmartObject>> smobject =  new List<Dictionary<int,SmartObject>>(group_count);
+
 		private Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
+		private Dictionary<string,Dictionary<int,List<SmartObject>>> event_actors = new Dictionary<string,Dictionary<int,List<SmartObject>>>(); 
 		private Sequence root = new Sequence();
 		
 		public SmartObject1 sm1;
@@ -46,10 +49,26 @@ namespace BT{
 			return success;
 		}
 
-		private void EventList(){
-			
+		private void init_Event_Group_List(){
+			foreach(var item in all_event){
+				var actor = event_actors[item.Key];
+				int pre = -1;
+				foreach (var id in item.Value.group_id){
+					if (id != pre){
+						foreach(var sm in smobject[id]){
+							actor[id].Add(sm.Value);
+						}
+					}
+					pre = id;
+				}
+			}
+
+
 		}
 		
+
+
+
 
 		public bool check_goal(){
 			return database.GetData<int>(sm1.test1_index) == 0 && database.GetData<int>(sm2.test2_index) ==0;
