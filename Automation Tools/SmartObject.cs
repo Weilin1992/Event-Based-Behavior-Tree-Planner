@@ -9,9 +9,13 @@ namespace BT
 	    public static int group_id;
 		protected int gameobject_id = 0;
 		protected int index = -1;
-		
+		protected bool onEvent = false;
+		public bool OnEvent{
+			get{return onEvent;}
+			set{onEvent  = value;}
+		}
 
-		
+
 
 		private int instance_id = -1;
 		public int Instance{

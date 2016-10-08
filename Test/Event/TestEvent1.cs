@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using BT;
 public class TestEvent1 : BTEvent{
     SmartObject1 participant1;
     SmartObject2 participant2;
-
     int test_a = 1;
-
     int participant1_d;
     int participant2_d;
     
-
     public override bool check_precon()
     {
         return manager.database.GetData<int>(participant1.test1_index) == 2 
@@ -23,7 +21,7 @@ public class TestEvent1 : BTEvent{
     }
 
 
-    public override void  set_participants(params SmartObject[] parti){
+    public override void  set_participants(List<SmartObject> parti){
          participant1 = (SmartObject1) parti[0];
          participant2 = (SmartObject2) parti[1];
 		}
@@ -66,5 +64,14 @@ public class TestEvent1 : BTEvent{
         
     }
 
+    public override BTEvent Clone(){
+        TestEvent1 newObject = (TestEvent1)base.Clone();
+        newObject.participant1 = this.participant1;
+        newObject.participant2 = this.participant2;
+        newObject.test_a = this.test_a;
+        newObject.participant1_d = this.participant1_d;
+        newObject.participant2_d = this.participant2_d;
+        return newObject;
+    }
 
 }
