@@ -50,6 +50,8 @@ namespace BT{
 			return newObject;
 		}
 
-
+		public BTNode Root(){
+			return root;
+		}
 	}
 }

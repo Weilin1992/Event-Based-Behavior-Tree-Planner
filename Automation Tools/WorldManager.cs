@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
+
 
 namespace BT{
 	public class WorldManager  {
@@ -23,18 +23,36 @@ namespace BT{
 		private Dictionary<string,Dictionary<int,List<SmartObject>>> event_actors = new Dictionary<string,Dictionary<int,List<SmartObject>>>();
 		private Dictionary<string,List<List<SmartObject>>> event_actor_combination = new Dictionary<string,List<List<SmartObject>>>(); 
 		private Sequence root = new Sequence();
-		
+		private List<List<EventInstance>> transition = new List<List<EventInstance>> ();
+		double cost = double.MaxValue;
 		public SmartObject1 sm1;
 		public SmartObject2 sm2;
 
-		//maybe we have to use prority queue
-		private Queue<BTEvent> eventQueue = new Queue<BTEvent>();
 
 		public static WorldManager getInstance(){
 			if(instance == null){
 				instance = new WorldManager();
 			}
 			return instance;
+		}
+
+		public void init_BT(){
+			foreach(var eInstance in transition){
+				SequenceParallel tmp = new SequenceParallel();
+				foreach(var e in eInstance){
+					tmp.AddChild(e.e.Root());
+				}
+				root.AddChild(tmp);
+			}
+		}
+
+		public void Tick(){
+			if(root.Tick() == Result.Failed){
+				reschedule();
+			}else{
+				Debug.Log("Success");
+			}
+			
 		}
 
 		public void register_sm(SmartObject so){
@@ -48,21 +66,51 @@ namespace BT{
 			all_event[e.Name] = e;	
 		}
 
-		private bool calculate_transition(){
-			bool success = false;
-			//test implement
-
-			if(check_goal()){
-				success = true;
-				return success;
+		private void dfs(List<List<EventInstance>> tran,double tmp_cost){
+			if(check_goal() != true){
+				List<List<EventInstance>> event_to_excute = generate_event_run_together();
+				if(event_to_excute.Count == 0){
+					return;
+				}
+				foreach (var eventgroup in event_to_excute){
+					double cost_event = tmp_cost;
+					foreach(var e in eventgroup){
+						e.e.set_participants(e.participants);
+						e.e.set_postcon_database();
+						cost_event+=e.e.calculate_cost();
+					}
+					tran.Add(eventgroup);
+					dfs(tran,tmp_cost);
+					foreach (var e in eventgroup){
+						e.e.restore_database();
+					}
+					tran.RemoveAt(tran.Count);
+				}
 			}
-			//end
-			while(check_goal() != true){
-				List<List<EventInstance>> event_to_excute;
-			}
-			return success;
+			else{
+				if(tmp_cost < cost){
+					transition = new List<List<EventInstance>>(tran);
+					cost = tmp_cost;
+				}
+			} 
 		}
 		
+		private void bfs(){
+
+		}
+
+
+
+		private void calculate_transition(){
+			List<List<EventInstance>> tran = new List<List<EventInstance>>();
+			dfs(tran,0.0);
+		}
+
+		private void reschedule(){
+
+		}
+
+		//generate event that can be excute parallel
 		private List<List<EventInstance>> generate_event_run_together(){
 			List<EventInstance> eventAvalilible = event_availible();
 			List<List<EventInstance>> event_to_excute = new List<List<EventInstance>>();
@@ -73,10 +121,33 @@ namespace BT{
 					foreach (var item in eventAvalilible){
 						List<EventInstance> tmp = new List<EventInstance>();
 						tmp.Add(item);
+						event_to_excute.Add(tmp);
 					}
 				}
 				else{
-					
+					foreach (var item in event_to_excute){
+						for(int i = index; i < eventAvalilible.Count;i++){
+							bool flag = false;
+							foreach (var e in item)
+							{
+								foreach(var p in e.participants){
+									foreach(var q in eventAvalilible[i].participants){
+										if(q == p){
+											flag = true;
+											break;
+										}
+									}
+								}
+							}
+
+							if(flag == true){
+								break;
+							}
+							List<EventInstance> tmp = new List<EventInstance>(item);
+							tmp.Add(eventAvalilible[i]);
+							event_to_excute.Add(tmp);
+						}
+					}
 				}
 
 				index++;
@@ -86,7 +157,7 @@ namespace BT{
 			
 		}
 		
-
+		// generate event that can be excute now
 		private List<EventInstance> event_availible(){
 			List<EventInstance> res = new List<EventInstance>();
 			foreach (var item in all_event){
