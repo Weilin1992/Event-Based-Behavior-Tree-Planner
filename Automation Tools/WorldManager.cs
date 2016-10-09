@@ -105,6 +105,9 @@ namespace BT{
 		private void partial_order_plan(){
 		}
 
+		private void huristic_plan(){
+		}
+
 
 		private void calculate_transition(){
 			List<List<EventInstance>> tran = new List<List<EventInstance>>();
