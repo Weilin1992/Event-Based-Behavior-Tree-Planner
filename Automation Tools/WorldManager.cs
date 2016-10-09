@@ -17,6 +17,7 @@ namespace BT{
 		public Blackboard database = new Blackboard();
 		private static WorldManager instance;
 		private const int group_count = 10;
+		private int depth = 15;
 		//admitedly, a factory mode could be better.
 		private List<List<SmartObject>> smobject =  new List<List<SmartObject>>(group_count);
 		public  Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
@@ -68,6 +69,9 @@ namespace BT{
 
 		private void dfs(List<List<EventInstance>> tran,double tmp_cost){
 			if(check_goal() != true){
+				if(tran.Count > depth ){
+					return; 
+				}
 				List<List<EventInstance>> event_to_excute = generate_event_run_together();
 				if(event_to_excute.Count == 0){
 					return;
@@ -96,9 +100,10 @@ namespace BT{
 		}
 		
 		private void bfs(){
-
 		}
 
+		private void partial_order_plan(){
+		}
 
 
 		private void calculate_transition(){
