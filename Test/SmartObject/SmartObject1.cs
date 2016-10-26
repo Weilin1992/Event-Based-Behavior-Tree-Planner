@@ -7,10 +7,8 @@ public class SmartObject1 : SmartObject {
 	public int test1_index;
 
 	// Use this for initialization
-	void Start () {
-		init();
-		manager.register_sm(this);
-		register_database();
+	protected override void Start () {
+		base.Start();
 	}
 	
 	// Update is called once per frame
@@ -27,7 +25,7 @@ public class SmartObject1 : SmartObject {
 	}
 
 	protected override void  register_database(){
-		test1_index = manager.database.addData<int>(this.name+gameobject_id.ToString() + "test1",test1);
+		test1_index = manager.database.addData<int>(this.name+InstanceID.ToString() + "test1",test1);
 	}
 
 	static SmartObject1(){

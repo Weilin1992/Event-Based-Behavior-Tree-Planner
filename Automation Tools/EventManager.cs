@@ -3,7 +3,5 @@
 
 namespace BT{
 public class EventManager{
-
-
-}
+    }
 }

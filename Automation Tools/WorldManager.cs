@@ -15,17 +15,25 @@ namespace BT{
 		}
 
 		public Blackboard database = new Blackboard();
+
 		private static WorldManager instance;
 		private const int group_count = 10;
-		private int depth = 15;
+		
+		public int depth = 15;// defs max depth
+
+		private Sequence root = new Sequence();
+
 		//admitedly, a factory mode could be better.
-		private List<List<SmartObject>> smobject =  new List<List<SmartObject>>(group_count);
-		public  Dictionary<string,BTEvent> all_event = new Dictionary<string,BTEvent>();
+		private List<List<SmartObject>> smobjects =  new List<List<SmartObject>>(group_count);
+		private  Dictionary<string,BTEvent> events = new Dictionary<string,BTEvent>();
 		private Dictionary<string,Dictionary<int,List<SmartObject>>> event_actors = new Dictionary<string,Dictionary<int,List<SmartObject>>>();
 		private Dictionary<string,List<List<SmartObject>>> event_actor_combination = new Dictionary<string,List<List<SmartObject>>>(); 
-		private Sequence root = new Sequence();
+		
 		private List<List<EventInstance>> transition = new List<List<EventInstance>> ();
-		double cost = double.MaxValue;
+		private double cost = double.MaxValue;
+
+
+		//goal smartobject;
 		public SmartObject1 sm1;
 		public SmartObject2 sm2;
 
@@ -41,7 +49,7 @@ namespace BT{
 			foreach(var eInstance in transition){
 				SequenceParallel tmp = new SequenceParallel();
 				foreach(var e in eInstance){
-					tmp.AddChild(e.e.Root());
+					tmp.AddChild(e.e);
 				}
 				root.AddChild(tmp);
 			}
@@ -58,16 +66,16 @@ namespace BT{
 
 		public void register_sm(SmartObject so){
 			if(so.Index != -1){
-				smobject[so.GroupID].Add(so);
-				so.Index = smobject[so.GroupID].Count;
+				smobjects[so.GroupID].Add(so);
+				so.Index = smobjects[so.GroupID].Count;
 			}
 		}
 
 		public void register_Event(BTEvent e){
-			all_event[e.Name] = e;	
+			events[e.Name] = e;	
 		}
 
-		private void dfs(List<List<EventInstance>> tran,double tmp_cost){
+		private void dfs(List<List<EventInstance>> tran,float tmp_cost){
 			if(check_goal() != true){
 				if(tran.Count > depth ){
 					return; 
@@ -77,11 +85,11 @@ namespace BT{
 					return;
 				}
 				foreach (var eventgroup in event_to_excute){
-					double cost_event = tmp_cost;
-					foreach(var e in eventgroup){
-						e.e.set_participants(e.participants);
-						e.e.set_postcon_database();
-						cost_event+=e.e.calculate_cost();
+					float cost_event = tmp_cost;
+					foreach(var ev in eventgroup){
+						ev.e.set_participants(ev.participants);
+						ev.e.set_postcon_database();
+						cost_event+=ev.e.calculate_cost();
 					}
 					tran.Add(eventgroup);
 					dfs(tran,tmp_cost);
@@ -102,20 +110,65 @@ namespace BT{
 		private void bfs(){
 		}
 
-		private void partial_order_plan(){
+		private void pop(){
 		}
 
-		private void huristic_plan(){
+		private List<EventInstance> huristic_plan(){
+			List<EventInstance> res = new List<EventInstance>();
+			List<List<EventInstance>> event_to_excute = generate_event_run_together();
+			if(event_to_excute.Count == 0){
+				return null;
+			}
+			float cost = 10000.0f;
+			foreach(var eventgroup in event_to_excute){
+				float tmp_cost = 0.0f;
+				foreach(var ev in eventgroup){
+						
+						ev.e.set_participants(ev.participants);
+						ev.e.set_postcon_database();
+						tmp_cost+=ev.e.calculate_cost() + h_cost();
+					}
+				if(tmp_cost < cost){
+					cost  = tmp_cost;
+					res = eventgroup;
+				}
+			}
+			return res;
+
 		}
+
+		private List<EventInstance> greedy_plan(){
+			List<EventInstance> res = new List<EventInstance>();
+			List<List<EventInstance>> event_to_excute = generate_event_run_together();
+			if(event_to_excute.Count == 0){
+				return null;
+			}
+			float cost = 10000.0f;
+			foreach(var eventgroup in event_to_excute){
+				float tmp_cost = 0.0f;
+				foreach(var ev in eventgroup){
+						
+						ev.e.set_participants(ev.participants);
+						ev.e.set_postcon_database();
+						tmp_cost+=ev.e.calculate_cost();
+					}
+				if(tmp_cost < cost){
+					cost  = tmp_cost;
+					res = eventgroup;
+				}
+			}
+			return res;
+		}
+
 
 
 		private void calculate_transition(){
 			List<List<EventInstance>> tran = new List<List<EventInstance>>();
-			dfs(tran,0.0);
+			dfs(tran,0.0f);
 		}
 
 		private void reschedule(){
-
+			calculate_transition();
 		}
 
 		//generate event that can be excute parallel
@@ -165,10 +218,10 @@ namespace BT{
 			
 		}
 		
-		// generate event that can be excute now
+		// generate event that the precondition has been satisfied
 		private List<EventInstance> event_availible(){
 			List<EventInstance> res = new List<EventInstance>();
-			foreach (var item in all_event){
+			foreach (var item in events){
 				BTEvent tmp = item.Value;
 				foreach(var group in event_actor_combination[item.Key]){
 					tmp.set_participants(group);
@@ -181,12 +234,12 @@ namespace BT{
 		} 
 
 		private void init_Event_Group_List(){
-			foreach(var item in all_event){
+			foreach(var item in events){
 				var actor = event_actors[item.Key];
 				int pre = -1;
 				foreach (var id in item.Value.group_id){
 					if (id != pre){
-						foreach(var sm in smobject[id]){
+						foreach(var sm in smobjects[id]){
 							actor[id].Add(sm);
 						}
 					}
@@ -196,7 +249,7 @@ namespace BT{
 		}
 		
 		private void generate_event_conbination(){
-			foreach(var item in all_event){
+			foreach(var item in events){
 				event_actor_combination[item.Key] = combination(item.Key,item.Value.group_id);
 			}
 		}
@@ -206,7 +259,7 @@ namespace BT{
 			int pre_count = 1;
 			List<List<SmartObject>> res = new List<List<SmartObject>>();
 			foreach (var item in group_id){
-				List<SmartObject> same_group = smobject[item];
+				List<SmartObject> same_group = smobjects[item];
 				List<List<SmartObject>> tmp2 = new List<List<SmartObject>>();
 				if(item != pre){
 					pre_count = 1;
@@ -267,5 +320,10 @@ namespace BT{
 		public bool check_goal(){
 			return database.GetData<int>(sm1.test1_index) == 0 && database.GetData<int>(sm2.test2_index) ==0;
 		}
+
+		private float h_cost(){
+			return 0;
+		}
+
 	}
 }

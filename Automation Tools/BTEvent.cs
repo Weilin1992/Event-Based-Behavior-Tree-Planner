@@ -4,25 +4,24 @@ using System.Collections.Generic;
 namespace BT{
 	public class BTEvent:BTNode{
 		public List<int> group_id = new List<int>();
-		private double cost = 0.0;
+		protected float cost = 0.0f;
 		protected BTNode root;
-		protected static WorldManager manager;
-
+		protected WorldManager manager;
 
 		public virtual bool check_precon(){return false;}
 		public virtual void set_postcon(){}
 
 		public virtual void set_participants(List<SmartObject> parti){
 		}
-		protected virtual void init_group_id(){
+		protected virtual void init_groupID(){
 		}
 
 		public virtual void set_postcon_database(){}
 		public virtual void restore_database(){}
-		public virtual double calculate_cost(){
+		public virtual float calculate_cost(){
 			return cost;
 		}
-
+	
 		protected override Result Excute(){
 			Result result =  root.Tick();
 			if(result == Result.Success){

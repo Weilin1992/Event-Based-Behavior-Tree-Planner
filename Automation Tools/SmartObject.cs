@@ -7,20 +7,14 @@ namespace BT
 	{
 		protected WorldManager manager;
 	    public static int group_id;
-		protected int gameobject_id = 0;
 		protected int index = -1;
 		protected bool onEvent = false;
 		public bool OnEvent{
 			get{return onEvent;}
 			set{onEvent  = value;}
 		}
-
-
-
-		private int instance_id = -1;
-		public int Instance{
-			get{return instance_id == -1 ? GetInstanceID():instance_id;}
-			set{instance_id = value;}
+		public int InstanceID{
+			get{return GetInstanceID();}
 		}
 
 		public int GroupID{
@@ -31,18 +25,18 @@ namespace BT
 			set{index = value;}
 		}
 
-		public void init(){
+		protected virtual void Start(){
 			manager = WorldManager.getInstance();
+			manager.register_sm(this);
+			register_database();
 		}
+
 		
-		protected virtual void register_database(){
+		protected virtual void register_database(){}
+		protected virtual void update_database(){}
 
-		}
-
-
-
-		protected virtual void update_database(){
-
+		protected virtual void FixUpdate(){
+			update_database();
 		}
 		
 	}
