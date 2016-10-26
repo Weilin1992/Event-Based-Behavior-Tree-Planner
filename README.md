@@ -49,7 +49,7 @@ _class in BT/Inherit from Monobehavior_
 ####Discription
 所有参与事件对象都需要继承自SmartObject,每个SmartObject都有对应的group_id，表示该对象隶属于某一类角色。在用户实现的SmartObject子类中，可以实现不同的action，用来进行BTEvent中行为树的编辑。
 ####Developer mannual
-public variables:  
+####public variables:  
 
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
@@ -58,14 +58,14 @@ public variables:
 | Index | int |  worldManager同一类别的角色存在一个list中，index为该角色在该list中的位置                                 |
 |InstanceID(read only)|int|该对象的实例index|
 
-protected variables:
+####protected variables:
 
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
 |manager|WorldManager|对单例世界管理器的引用|
-|
 
-protected Function:
+
+####protected Function:
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
@@ -75,7 +75,7 @@ protected Function:
 |regitster_database(virtual)|注册变量到database（blackboard）
 |update_database(virtual)|更新database变量
 
-public variables:  
+####public variables:  
 
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
@@ -87,7 +87,7 @@ public variables:
 _class in BT/Inherit from BTNode_;
 ####Discription:
 想要实现一个Event，需要继承BTEvent类。BTEvent包含了参与该事件的SmartObject，该事件的cost，一个独立的behavior tree。
-protected variables:
+####protected variables:
 
 | Name          | Type      | Discription                                  
 | ------------- |:--------:| :-------------------------------------|
@@ -95,14 +95,14 @@ protected variables:
 |manager|WorldManager|对单例世界管理器的引用|
 |cost|float|事件消耗|
 
-protected Function:
+####protected Function:
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
 |init_groupID(virtual)|初始化事件参与者类别列表|
 |init_BT()|初始化行为树|
 
-public Function:
+####public Function:
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
@@ -113,7 +113,7 @@ public Function:
 |set_participants（virtual）|设置参与该事件的SmartObject的引用对象|
 |Clone(virtual)|__浅拷贝__当前对象|
 
-Inherited Function:
+####Inherited Function:
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
@@ -124,14 +124,14 @@ _class in BT_
 ####Discription:
 游戏世界管理规划者，使用单例模式（待商榷），负责规划事件发生顺序，并根据各个事件的行为树生成最终行为树。
 
-public variables:  
+####public variables:  
 
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
 |database|Blackboard|存储世界state(我一定脑子有坑不叫blackboard叫database)|
 |depth|int|dfs搜索最大深度|
 
-private variables:  
+####private variables:  
 
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
@@ -139,7 +139,7 @@ private variables:
 |group_count|const int|SmartObject类别总数|
 |root|BT::Sequence|最终行为树根节点|
 
-public Function:
+####public Function:
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
@@ -149,7 +149,7 @@ public Function:
 |register_sm|每个SmartObject实例化都必须在世界管理器中注册|
 |register_event|每个事件都要注册一次|
 
-private Function:
+####private Function:
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
