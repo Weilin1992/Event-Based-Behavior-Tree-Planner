@@ -41,14 +41,14 @@ GOAP的好处那么多，自然也有很多问题，不然早就变得很流行�
 行为树这部分不做过多介绍，相信大家都懂什么是行为树。我实现了一个简单的行为树框架，有基本的组合节点，装饰节点，和叶节点，还有一个blackboard。具体的例子可以看Test目录下的例子，真的很简单。以后有时间了我会补个教程。
 
 ###4.2 Planner
-
+###Developer mannual:
 Planner主要涉及到四个部分:WorldManger,BTEvent,SmartObject,EventInstance
 
 ####4.2.1 SmartObject
 _class in BT/Inherit from Monobehavior_
 ####Discription
 所有参与事件对象都需要继承自SmartObject,每个SmartObject都有对应的group_id，表示该对象隶属于某一类角色。在用户实现的SmartObject子类中，可以实现不同的action，用来进行BTEvent中行为树的编辑。
-####Developer mannual
+
 ####public variables:  
 
 | Name          | Type      | Discription                                  |
