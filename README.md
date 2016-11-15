@@ -156,8 +156,8 @@ __EventInstance__:一个事件的实例,包含一个事件及参与者。
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
-|void dfs()|dfs事件规划(目测gc爆炸)|
-|void bfs()|bfs事件规划（待完成,目测比上面的还要爆炸）|
+|void dfs()|dfs事件规划|
+|void bfs()|bfs事件规划|
 |void pop()|partial order planner(待完成)
 |List< List < EventInstance >  > huristic_plan()|启发式搜索|
 |List< List < EventInstance >  > greedy_plan()|贪心搜索|
