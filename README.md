@@ -123,7 +123,7 @@ __EventInstance__: An Instance of an event, contains the event and the participa
 
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
-|instance|WorldManager|sigleton Instance of the WorldManager|
+|instance|WorldManager|singleton Instance of the WorldManager|
 |group_count|const int|the total number fo SmartObject categories|
 |root|BT::Sequence|the root of the final behavior tree generate based on the sequence of the event|
 
@@ -131,7 +131,7 @@ __EventInstance__: An Instance of an event, contains the event and the participa
 
 | Name          | Discription                                  |
 | ------------- |:-------------------------------------        |
-|WorldManager getInstance()||
+|WorldManager getInstance()|get the singleton instance of the WorldManager.|
 |void init_BT()|base on the sequence of the event, generate the final behavior tree|
 |void Tick()|excute the final behavior tree|
 |void register_sm(SmartObject sm)|each instance of the smartobject have to be registered into worldmanager|
