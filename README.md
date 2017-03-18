@@ -36,8 +36,8 @@ All GameObject involved in an event must inherit SmartObject. Every object has a
 | Name          | Type      | Discription                                  |
 | ------------- |:--------:| :-------------------------------------|
 | GroupID     |int| gameobject or character category id                  |
-| OnEvent     | bool |   if this object involved in an event                                 | 
-| Index | int |  in worldManager all gameobject with same group id are stored in the same list, this is the index of this gameobject in that list                         |
+| OnEvent     | bool |   if this object is involved in an event                                 | 
+| Index | int |  in worldManager all gameobjects with same group id are stored in the same list, this is the index of this gameobject in that list                         |
 |InstanceID(read only)|int|instanceID of the gameobject|
 
 #### protected variables:
